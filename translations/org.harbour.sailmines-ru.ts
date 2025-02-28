@@ -70,7 +70,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ensure there's always some free space around your first cell</source>
+        <source>Ensure there&apos;s always some free space around your first cell</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

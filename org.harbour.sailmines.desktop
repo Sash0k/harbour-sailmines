@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+X-Nemo-Application-Type=silica-qt5
+Icon=org.harbour.sailmines
+Exec=/usr/bin/org.harbour.sailmines
+Name=SailMines
+Name[ru]=Сапёр
+
+[X-Application]
+OrganizationName=org.harbour
+ApplicationName=sailmines
+# Add the required permissions here
+Permissions=
