@@ -18,8 +18,10 @@ SOURCES += src/sailmines.cpp
 
 DISTFILES += rpm/org.harbour.sailmines.spec
 
+AURORAAPP_ICONS = 86x86 108x108 128x128 172x172
+
 CONFIG += auroraapp_i18n
 
-TRANSLATIONS += translations/org.harbour.sailmines-ru.ts
-
-AURORAAPP_ICONS = 86x86 108x108 128x128 172x172
+TRANSLATIONS += \
+    translations/org.harbour.sailmines.ts \
+    translations/org.harbour.sailmines-ru.ts \

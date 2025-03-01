@@ -1,6 +1,6 @@
 Name:       org.harbour.sailmines
 
-Summary:    Порт игры Сапёр (Sailmines) из SFOS на Аврору
+Summary:    Порт игры Сапёр (Sailmines) на Аврору
 Version:    0.8
 Release:    1
 License:    MIT
