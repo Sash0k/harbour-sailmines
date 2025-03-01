@@ -13,12 +13,12 @@ ApplicationWindow {
         ConfigurationValue {
             id: gridSize
             key: "/apps/sailmines/settings/gridsize"
-            defaultValue: 15
+            defaultValue: 10
         }
         ConfigurationValue {
             id: numMines
             key: "/apps/sailmines/settings/numMines"
-            defaultValue: 25
+            defaultValue: 15
         }
         ConfigurationValue {
             id: controlMode
