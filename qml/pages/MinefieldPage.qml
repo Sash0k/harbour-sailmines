@@ -65,7 +65,6 @@ Page {
                     // Expose Button's text property through an alias
                     property alias buttonText: cellButton.text
                     property alias buttonEnabled: cellButton.enabled
-                    property alias buttonColour: cellButton.color
 
                     // there are gridSize.value^2 buttons generated here,
                     // each representing a cell on the minefield.
@@ -75,6 +74,8 @@ Page {
                         anchors.fill: parent
                         implicitWidth: cell.width
                         implicitHeight: cell.height
+                        backgroundColor: Theme.rgba(Theme.primaryColor, Theme.opacityFaint)
+                        color: getCellColor(text)
 
                         // The following logic determines if a button
                         // is pressed or long-pressed.
@@ -183,10 +184,7 @@ Page {
         for (var i = 0; i < (gridSize.value * gridSize.value); i++) {
             grid.children[i].buttonEnabled = true;
             grid.children[i].buttonText = "";
-            grid.children[i].buttonColour = palette.primaryColor;
         }
-
-
     }
 
     function countAdjacentMines(index) {
@@ -212,7 +210,7 @@ Page {
                     // if we're preventing accidental taps of cells that are potentially still
                     // dangerous,
 
-                    grid.children[index].buttonColour = palette.errorColor; // warn the user, don't reveal its adjacent cells!
+                    //grid.children[index].buttonColour = palette.errorColor; // убрал подсветку неоткрываемых
                     // note this doesn't check if the flags are in the right spot, just that
                     // there are the right number of flags.
                 } else {
@@ -276,28 +274,7 @@ Page {
         }
 
         if (mineHints.value) { // if the settings are configured such,
-            var adjacentCells = getAdjacentIndices(index);
-            for (var j = 0; j < adjacentCells.length; j++) { // for each adjacent cell to the one pressed
-                if (highlightCell(adjacentCells[j])) {
-                    grid.children[adjacentCells[j]].buttonColour = palette.secondaryColor;
-                } else {
-                    grid.children[adjacentCells[j]].buttonColour = palette.primaryColor
-                }
-            }
-        }
-    }
-
-    function applyHighlights() {
-        for (var i = 0; i < board.length; i++) {
-            if (!mineHints.value) {
-                if (highlightCell(i)) {
-                    grid.children[i].buttonColour = palette.secondaryColor;
-                } else {
-                    grid.children[i].buttonColour = palette.primaryColor
-                }
-            } else {
-                grid.children[i].buttonColour = palette.primaryColor;
-            }
+            // TODO: выпилить эту настройку
         }
     }
 
@@ -314,11 +291,9 @@ Page {
             }
 
             if (flagCount === adjacentMines) { // check the number of flags matches the requirement
-                //grid.children[index].buttonColour = palette.secondaryColor; // let the user see that
                 return(true);
             } else {
                 return(false);
-                //grid.children[index].buttonColour = palette.primaryColor;
             }
         }
     }
@@ -481,6 +456,17 @@ Page {
         //scrollableArea.contentHeight = (grid.height) * grid.scale
     }
 
-
+    // Цвет текста в ячейке
+    function getCellColor(text) {
+        switch(text) {
+            case "1": return "blue"
+            case "2": return "green"
+            case "3": return "red"
+            case "4": return "navy"
+            case "5": return "chocolate"
+            case "6": return "black"
+            default: return Theme.primaryColor
+        }
+    }
 
 }
