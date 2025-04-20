@@ -42,7 +42,7 @@ ApplicationWindow {
         }
     }
 
-    initialPage: Component { MinefieldPage { } }
+    initialPage: Qt.resolvedUrl("pages/MinefieldPage.qml")
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: defaultAllowedOrientations
 }

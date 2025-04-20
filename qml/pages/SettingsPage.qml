@@ -4,6 +4,7 @@ import Nemo.Configuration 1.0
 
 Page {
     id: settingPage
+    allowedOrientations: Orientation.All
 
     property Page gamePageRef
 

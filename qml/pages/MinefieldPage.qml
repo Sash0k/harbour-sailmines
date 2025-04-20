@@ -4,6 +4,7 @@ import Sailfish.Silica 1.0
 
 Page {
     id: gamePage
+    allowedOrientations: Orientation.All
 
     property var board: []
 
@@ -49,7 +50,7 @@ Page {
 
         Grid {
             id: grid
-            width: parent.width - grid.spacing*2
+            width: Math.min(parent.width, parent.height) - grid.spacing*2
             columns: gridSize.value
             anchors.centerIn: parent
             spacing: 1
@@ -58,7 +59,7 @@ Page {
                 model: gridSize.value * gridSize.value
                 Item {
                     id: cell
-                    width: grid.width / grid.columns
+                    width: Math.min(grid.width, grid.height) / grid.columns
                     height: width
 
                     // Expose Button's text property through an alias
