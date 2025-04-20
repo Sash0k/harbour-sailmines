@@ -40,26 +40,26 @@ Page {
     Flickable {
         id: scrollableArea
         anchors.fill: parent
+        anchors.rightMargin: grid.spacing * grid.columns
         anchors.bottomMargin: gameFooter.height
-        // Buffer of '750' means you don't have to reach right to the edge
-        // of the screen.
-        contentWidth: grid.width + 750      // Sets the horizontal scroll limit
-        contentHeight: grid.height + 750    // Sets the vertical scroll limit
-        clip: true                          // Clips content to keep it within viewable area
+        //contentWidth: grid.width + 750      // Sets the horizontal scroll limit
+        //contentHeight: grid.height + 750    // Sets the vertical scroll limit
+        clip: false                           // Clips content to keep it within viewable area
         scale: 1.0
 
         Grid {
             id: grid
+            width: parent.width - grid.spacing*2
             columns: gridSize.value
             anchors.centerIn: parent
-            spacing: 2
+            spacing: 1
 
             Repeater {
                 model: gridSize.value * gridSize.value
-                SilicaFlickable {
+                Item {
                     id: cell
-                    width: 100
-                    height: 120
+                    width: grid.width / grid.columns
+                    height: width
 
                     // Expose Button's text property through an alias
                     property alias buttonText: cellButton.text
@@ -72,6 +72,8 @@ Page {
                         id: cellButton
                         text: ""
                         anchors.fill: parent
+                        implicitWidth: cell.width
+                        implicitHeight: cell.height
 
                         // The following logic determines if a button
                         // is pressed or long-pressed.
@@ -474,8 +476,8 @@ Page {
 
     function fixScrollBounds() {
         // Update Flickable content size to allow panning when zoomed
-        scrollableArea.contentWidth = (grid.width) * grid.scale + 750
-        scrollableArea.contentHeight = (grid.height) * grid.scale + 750
+        //scrollableArea.contentWidth = (grid.width) * grid.scale
+        //scrollableArea.contentHeight = (grid.height) * grid.scale
     }
 
 
