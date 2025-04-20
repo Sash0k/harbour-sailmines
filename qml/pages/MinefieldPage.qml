@@ -179,12 +179,13 @@ Page {
         mineCount.text = numMines.value;
         timerText.text = 0;
         isFirstPress = true;
+        grid.enabled = true;
 
         // Enable every button, set its text to nothing, set its colour to primary.
-        for (var i = 0; i < (gridSize.value * gridSize.value); i++) {
+        for (var i = 0; i < (gridSize.value * gridSize.value); i++) {            
             grid.children[i].buttonEnabled = true;
             grid.children[i].buttonText = "";
-        }
+        }        
     }
 
     function countAdjacentMines(index) {
@@ -376,12 +377,14 @@ Page {
 
         } else {
             // you lose.
+            grid.enabled = false
 
             // show all the mines
             for (var i = 0; i < board.length; i++) {
                 if (board[i] === -1) {
                     if (grid.children[i].buttonText !== "🏳") {
-                    grid.children[i].buttonText = "💣"; }
+                    grid.children[i].buttonText = "💣";
+                    }
                 }
             }
 
