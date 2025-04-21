@@ -8,21 +8,19 @@ CoverBackground {
         Image {
             id: iconImage
             anchors.horizontalCenter: parent.horizontalCenter
-            source: "../../../icons/hicolor/172x172/apps/harbour-sailmines.png"
+            source: "../../../icons/hicolor/172x172/apps/org.harbour.sailmines.png"
         }
         Label {
             id: label
-            text: "SailMines"
+            text: " "
             anchors.horizontalCenter: parent.horizontalCenter
         }
         Label {
             text: qsTr("Field: ") + gridSize.value + "x" + gridSize.value + " 🏳"
-            color: palette.highlightColor
             anchors.horizontalCenter: parent.horizontalCenter
         }
         Label {
             text: qsTr("Mines: ") + numMines.value + " 💣"
-            color: palette.highlightColor
             anchors.horizontalCenter: parent.horizontalCenter
         }
     }
