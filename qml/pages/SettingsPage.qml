@@ -161,6 +161,7 @@ Page {
                 }
                 TextSwitch {
                     id: hintsSwitch
+                    visible: false
                     text: qsTr("Dim cells when the correct number of flags surround them")
                     checked: mineHints.value
                     onClicked: {
