@@ -132,9 +132,11 @@ Page {
             }
             Label {
                 id: timerText
+                width: 50
                 text: "0"
                 anchors.verticalCenter: parent.verticalCenter
-                font.family: Theme.fontFamilyHeading
+                horizontalAlignment: TextInput.AlignHCenter
+                font.family: "monospace"
             }
             IconButton {
                 id: restart
@@ -150,9 +152,11 @@ Page {
             }
             Label {
                 id: mineCount
+                width: 50
                 text: "NaN"
                 anchors.verticalCenter: parent.verticalCenter
-                font.family: Theme.fontFamilyHeading
+                horizontalAlignment: TextInput.AlignHCenter
+                font.family: "monospace"
             }
             SecondaryButton {
                 id: zoomInBtn
