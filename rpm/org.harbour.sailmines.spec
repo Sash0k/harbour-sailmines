@@ -2,9 +2,9 @@ Name:       org.harbour.sailmines
 
 Summary:    Порт игры Сапёр (Sailmines) на Аврору
 Version:    0.8
-Release:    1
+Release:    2
 License:    MIT
-URL:        https://github.com/sharks-dev/harbour-sailmines
+URL:        https://github.com/Sash0k/harbour-sailmines
 Source0:    %{name}-%{version}.tar.bz2
 Requires:   sailfishsilica-qt5 >= 0.10.9
 BuildRequires:  pkgconfig(auroraapp)

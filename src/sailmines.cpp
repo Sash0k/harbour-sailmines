@@ -1,7 +1,4 @@
-#ifdef QT_QML_DEBUG
 #include <QtQuick>
-#endif
-
 #include <auroraapp.h>
 
 int main(int argc, char *argv[])
