@@ -320,7 +320,7 @@ Page {
                 // we know we have the right number of flags,
                 // but not sure if they're in the right places.
                 var count = 0;
-                for (i = 0; i < board.length; i++) {
+                for (var i = 0; i < board.length; i++) {
                     if (board[i] === -1) {
                         if (grid.children[i].buttonText === "🏳") {
                             count++
