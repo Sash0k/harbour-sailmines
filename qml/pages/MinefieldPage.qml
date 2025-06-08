@@ -188,6 +188,7 @@ Page {
         mineCount.text = numMines.value;
         timerText.text = 0;
         isFirstPress = true;
+        grid.scale = 1.0
         grid.enabled = true;
 
         // Enable every button, set its text to nothing, set its colour to primary.
