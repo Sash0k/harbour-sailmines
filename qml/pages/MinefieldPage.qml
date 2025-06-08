@@ -119,56 +119,53 @@ Page {
 
     }
 
-    Column { // why is this a column?
+    Row {
+        // This row contains the timer, a reset button,
+        // a settings button, and the remaining count of mines.
         id: gameFooter
-        width: parent.width
+        spacing: Theme.paddingLarge
         anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
         z: 1
-        Row {
-            // This row contains the timer, a reset button,
-            // a settings button, and the remaining count of mines.
-            spacing: Theme.paddingLarge
-            anchors.horizontalCenter: parent.horizontalCenter
-            SecondaryButton {
-                id: zoomOutBtn
-                width: height
-                icon.source: "image://theme/icon-m-remove"
-                onClicked: updateScale(false)
-            }
-            Label {
-                id: timerText
-                width: 50
-                text: "0"
-                anchors.verticalCenter: parent.verticalCenter
-                horizontalAlignment: TextInput.AlignHCenter
-                font.family: "monospace"
-            }
-            IconButton {
-                id: restart
-                icon.source: "image://theme/icon-m-refresh"
-                anchors.verticalCenter: parent.verticalCenter
-                onClicked: initialiseBoard()
-            }
-            IconButton {
-                id: options
-                icon.source: "image://theme/icon-m-setting"
-                anchors.verticalCenter: parent.verticalCenter
-                onClicked: pageStack.animatorPush(Qt.resolvedUrl("SettingsPage.qml"), { gamePageRef: gamePage })
-            }
-            Label {
-                id: mineCount
-                width: 50
-                text: "NaN"
-                anchors.verticalCenter: parent.verticalCenter
-                horizontalAlignment: TextInput.AlignHCenter
-                font.family: "monospace"
-            }
-            SecondaryButton {
-                id: zoomInBtn
-                width: height
-                icon.source: "image://theme/icon-m-add"
-                onClicked: updateScale(true)
-            }
+        SecondaryButton {
+            id: zoomOutBtn
+            width: height
+            icon.source: "image://theme/icon-m-remove"
+            onClicked: updateScale(false)
+        }
+        Label {
+            id: timerText
+            width: 50
+            text: "0"
+            anchors.verticalCenter: parent.verticalCenter
+            horizontalAlignment: TextInput.AlignHCenter
+            font.family: "monospace"
+        }
+        IconButton {
+            id: restart
+            icon.source: "image://theme/icon-m-refresh"
+            anchors.verticalCenter: parent.verticalCenter
+            onClicked: initialiseBoard()
+        }
+        IconButton {
+            id: options
+            icon.source: "image://theme/icon-m-setting"
+            anchors.verticalCenter: parent.verticalCenter
+            onClicked: pageStack.animatorPush(Qt.resolvedUrl("SettingsPage.qml"), { gamePageRef: gamePage })
+        }
+        Label {
+            id: mineCount
+            width: 50
+            text: "NaN"
+            anchors.verticalCenter: parent.verticalCenter
+            horizontalAlignment: TextInput.AlignHCenter
+            font.family: "monospace"
+        }
+        SecondaryButton {
+            id: zoomInBtn
+            width: height
+            icon.source: "image://theme/icon-m-add"
+            onClicked: updateScale(true)
         }
     }
 
