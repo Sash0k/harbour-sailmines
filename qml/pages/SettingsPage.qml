@@ -244,7 +244,6 @@ Page {
         gridSize.value = Math.round(boardSize.value);
         numMines.value = Math.round(mineCount.value);
         gamePageRef.initialiseBoard();
-        gamePageRef.fixScrollBounds();
     }
 
     function changeControls() {

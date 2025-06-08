@@ -9,6 +9,7 @@ Page {
     property var board: []
 
     property bool isFirstPress: true
+    readonly property int cellSize: 70
 
     // controls the flag vibration
     ThemeEffect {
@@ -41,69 +42,73 @@ Page {
     Flickable {
         id: scrollableArea
         anchors.fill: parent
-        anchors.rightMargin: grid.spacing * grid.columns
         anchors.bottomMargin: gameFooter.height
-        //contentWidth: grid.width + 750      // Sets the horizontal scroll limit
-        //contentHeight: grid.height + 750    // Sets the vertical scroll limit
-        clip: false                           // Clips content to keep it within viewable area
-        scale: 1.0
+        contentWidth: contentWrapper.width
+        contentHeight: contentWrapper.height
+        clip: true
 
-        Grid {
-            id: grid
-            width: Math.min(parent.width, parent.height) - grid.spacing*2
-            columns: gridSize.value
-            anchors.centerIn: parent
-            spacing: 1
+        // промежуточный контейнер для центровки поля по ширине, https://stackoverflow.com/a/59854388
+        Item {
+            id: contentWrapper
+            width: Math.max(scrollableArea.width, grid.width)
+            height: Math.max(scrollableArea.height, grid.height)
 
-            Repeater {
-                model: gridSize.value * gridSize.value
-                Item {
-                    id: cell
-                    width: Math.min(grid.width, grid.height) / grid.columns
-                    height: width
+            Grid {
+                id: grid
+                columns: gridSize.value
+                anchors.centerIn: parent
+                spacing: 1
 
-                    // Expose Button's text property through an alias
-                    property alias buttonText: cellButton.text
-                    property alias buttonEnabled: cellButton.enabled
+                Repeater {
+                    model: gridSize.value * gridSize.value
+                    Item {
+                        id: cell
+                        width: cellSize
+                        height: cellSize
 
-                    // there are gridSize.value^2 buttons generated here,
-                    // each representing a cell on the minefield.
-                    Button {
-                        id: cellButton
-                        text: ""
-                        anchors.fill: parent
-                        implicitWidth: cell.width
-                        implicitHeight: cell.height
-                        backgroundColor: Theme.rgba(Theme.primaryColor, Theme.opacityFaint)
-                        color: getCellColor(text)
+                        // Expose Button's text property through an alias
+                        property alias buttonText: cellButton.text
+                        property alias buttonEnabled: cellButton.enabled
 
-                        // The following logic determines if a button
-                        // is pressed or long-pressed.
-                        MouseArea {
-                            id: mouseArea
+                        // there are gridSize.value^2 buttons generated here,
+                        // each representing a cell on the minefield.
+                        Button {
+                            id: cellButton
+                            text: ""
                             anchors.fill: parent
-                            onPressed: {
-                                longPressTimer.start()  // Start the timer on press
-                            }
-                            onReleased: {
-                                if (longPressTimer.running) {
-                                    longPressTimer.stop()  // Stop the timer if it's running
-                                    buttonPress(!controlMode.value, cell, index); // Short press action
+                            implicitWidth: cell.width
+                            implicitHeight: cell.height
+                            backgroundColor: Theme.rgba(Theme.primaryColor, Theme.opacityFaint)
+                            color: getCellColor(text)
+
+                            // The following logic determines if a button
+                            // is pressed or long-pressed.
+                            MouseArea {
+                                id: mouseArea
+                                anchors.fill: parent
+                                onPressed: {
+                                    longPressTimer.start()  // Start the timer on press
+                                }
+                                onReleased: {
+                                    if (longPressTimer.running) {
+                                        longPressTimer.stop()  // Stop the timer if it's running
+                                        buttonPress(!controlMode.value, cell, index); // Short press action
+                                    }
+                                }
+                                onCanceled: {
+                                    longPressTimer.stop()  // Stop the timer if the press is canceled
                                 }
                             }
-                            onCanceled: {
-                                longPressTimer.stop()  // Stop the timer if the press is canceled
-                            }
-                        }
 
-                        Timer {
-                            id: longPressTimer
-                            interval: holdDuration.value
-                            repeat: false
-                            onTriggered: {
-                                if (cell.buttonEnabled === true) {
-                                    keypadBuzz.play();
-                                    buttonPress(controlMode.value, cell, index); // Long press action
+                            Timer {
+                                id: longPressTimer
+                                interval: holdDuration.value
+                                repeat: false
+                                onTriggered: {
+                                    if (cell.buttonEnabled === true) {
+                                        keypadBuzz.play();
+                                        buttonPress(controlMode.value, cell, index); // Long press action
+                                    }
                                 }
                             }
                         }
@@ -453,14 +458,6 @@ Page {
                 }
             }
         }
-
-        fixScrollBounds();
-    }
-
-    function fixScrollBounds() {
-        // Update Flickable content size to allow panning when zoomed
-        //scrollableArea.contentWidth = (grid.width) * grid.scale
-        //scrollableArea.contentHeight = (grid.height) * grid.scale
     }
 
     // Цвет текста в ячейке
