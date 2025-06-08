@@ -335,8 +335,7 @@ Page {
                 }
                 if (count === numMines.value) {
                     // we know the flags were in the right spot.
-                    gameTimer.stop();
-                    Notices.show(qsTr("You won!"), Notice.Short, Notice.Center);
+                    winGame();
                 }
             }
         }
@@ -380,9 +379,7 @@ Page {
                     }
                 }
                 mineCount.text = "0";
-                // stop timer
-                gameTimer.stop();
-                Notices.show(qsTr("You won!"), Notice.Short, Notice.Center);
+                winGame();
             }
 
         } else {
@@ -403,6 +400,19 @@ Page {
 
             longBuzz.play();
             Notices.show(qsTr("You lost!"), Notice.Short, Notice.Center);
+        }
+    }
+
+    function winGame() {
+        gameTimer.stop();
+        Notices.show(qsTr("You won!"), Notice.Short, Notice.Center);
+
+        grid.enabled = false;
+        // открыть все поля, кроме флагов
+        for (var i = 0; i < (gridSize.value * gridSize.value); i++) {
+            if (grid.children[i].buttonText !== "🏳") {
+                grid.children[i].buttonEnabled = false;
+            }
         }
     }
 
